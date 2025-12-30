@@ -1,8 +1,8 @@
-the_geom,NAME,TEL,URL,ADRESS1,ADDRESS2,CITY,ZIP,FREE
+the_geom,NAME,TEL,URL,ADRESS1,ADDRESS2,CITY,ZIP,COST
 POINT (-74.01375579519738 40.703816216918035),Alexander Hamilton U.S. Custom House,(212) 514-3700,http://www.oldnycustomhouse.gov/,1 Bowling Grn,,New York,"10,004",FALSE
 POINT (-74.06303178855111 40.615120837755356),Alice Austen House Museum,(718) 816-4506,http://www.aliceausten.org/,2 Hylan Blvd,,Staten Island,"10,305",FALSE
 POINT (-73.94729768541572 40.833853500753314),American Academy of Arts and Letters,(212) 368-5900,http://www.artsandletters.org/,633 W. 155th St.,,New York,"10,032",FALSE
-POINT (-73.97810302110001 40.76162497138548),American Folk Art Museum,(212) 265-1040,http://www.folkartmuseum.org/,45 West 53rd Street,,New York,"10,019",TRUE
+POINT (-73.97810302110001 40.76162497138548),American Folk Art Museum,(212) 265-1040,http://www.folkartmuseum.org/,45 West 53rd Street,,New York,"10,019",0
 POINT (-74.0396848374904 40.69905626244391),American Immigration History Center,(212) 363-3200,http://www.ellisisland.org/,Ellis Island,,New York,0,FALSE
 POINT (-73.97364816377815 40.78082623457644),American Museum of Natural History,(212) 769-5100,http://www.amnh.org/,Central Park West at 79th Street,,New York,"10,024",FALSE
 POINT (-74.00701187920873 40.72352659262823),American Numismatic Society,(212) 571-4470,http://www.numismatics.org/,75 Varick St,11th Floor,New York,"10,013",FALSE
@@ -13,7 +13,7 @@ POINT (-73.94654590494326 40.83358228246046),Audubon Terrace,,http://www.washing
 POINT (-73.80557949995756 40.87177831678272),Bartow-Pell Mansion,(718) 885-1461,http://bartowpellmansionmuseum.org/index.php,895 Shore Road,Pelham Bay Park,Bronx,"10,464",FALSE
 POINT (-73.82489046385625 40.762886331946646),Bowne House,(718) 359-0528,http://www.bownehouse.org/,37-01 Bowne Street,,Queens,"11,354",FALSE
 POINT (-73.87974874003561 40.87823644134894),Bronx Historical Society & Musem,(718) 881-8900,http://www.bronxhistoricalsociety.org/,3309 Bainbridge Ave,,Bronx,"10,467",FALSE
-POINT (-73.91975017724828 40.83102977992849),Bronx Museum of the Arts (BXMA),(718) 681-6000,http://www.bronxmuseum.org/,1040 Grand Concourse,,Bronx,"10,456",TRUE
+POINT (-73.91975017724828 40.83102977992849),Bronx Museum of the Arts (BXMA),(718) 681-6000,http://www.bronxmuseum.org/,1040 Grand Concourse,,Bronx,"10,456",0
 POINT (-73.94401601383748 40.67450699609931),Brooklyn Children's Museum,(718) 735-4400,http://www.brooklynkids.org/,145 Brooklyn Avenue,,Brooklyn,"11,213",FALSE
 POINT (-73.99240540393131 40.694802974910445),Brooklyn Historical Society,(718) 222-4111,http://www.brooklynhistory.org/default/index.html,128 Pierrepont Street,,Brooklyn,"11,201",FALSE
 POINT (-73.96358506797661 40.67108321212629),Brooklyn Museum,(718) 638-5000,http://www.brooklynmuseum.org/,200 Eastern Parkway,,Brooklyn,"11,238",FALSE
@@ -73,12 +73,12 @@ POINT (-73.99919191942232 40.71945394633874),Museum Of Chinese In America,(212) 
 POINT (-73.99670247583494 40.7247979456424),Museum of Comic and Cartoon Art (MoCCA),(212) 254 3511,http://www.moccany.org/,594 Broadway,Suite 401,New York,"10,012",FALSE
 POINT (-73.97442477664784 40.68524514383062),Museum of Contemporary African Diasporan Arts (MoCADA),(718) 230-0492,http://www.mocada.org/,80 Hanson Place,,Brooklyn,"11,217",FALSE
 POINT (-74.01858571588612 40.705986647371226),Museum of Jewish Heritage,(646) 437-4200,http://www.mjhnyc.org/index.htm,36 Battery Place,,New York,"10,280",FALSE
-POINT (-73.97700363152086 40.76118664102449),Museum of Modern Art (MoMA),(212) 708-9400,http://www.moma.org/,11 West 53rd Street,,New York,"10,019",TRUE
+POINT (-73.97700363152086 40.76118664102449),Museum of Modern Art (MoMA),(212) 708-9400,http://www.moma.org/,11 West 53rd Street,,New York,"10,019",0
 POINT (-73.95191697462884 40.792509034510005),Museum of the City of New York,(212) 534-1672,http://www.mcny.org,1220 Fifth Avenue,,New York,"10,029",FALSE
 POINT (-73.92451017252192 40.75694448741239),Museum of the Moving Image,(718) 784-4520,http://www.movingimage.us/site/site.php,35 Avenue at 36 Street,,Queens,"11,106",FALSE
 POINT (-73.95849177369215 40.78361316720407),National Academy Museum,(212) 369-4880,https://nationalacademy.org/index.asp,1083 5th Avenue,,New York,"10,128",FALSE
 POINT (-74.07373713057605 40.64094901557986),National Lighthouse Museum,(718) 556-1681,http://statenislandusa.com/pages/lighthouse.html,1 Lighthouse Plaza,,Staten Island,"10,301",FALSE
-POINT (-74.01372704598201 40.704321256986034),National Museum of the American Indian,(212) 514-3700,http://www.nmai.si.edu/,1 Bowling Green,,New York,"10,004",TRUE
+POINT (-74.01372704598201 40.704321256986034),National Museum of the American Indian,(212) 514-3700,http://www.nmai.si.edu/,1 Bowling Green,,New York,"10,004",0
 POINT (-74.01091566131102 40.70965448747792),National September 11 Memorial & Museum at the World Trade Center,(212) 227-7722,http://www.911memorial.org/,1 Liberty Plaza,20th Floor,New York,"10,006",FALSE
 POINT (-73.96024812606315 40.78124233583781),Neue Galerie New York,(212) 628-6200,http://www.neuegalerie.org/,1048 Fifth Avenue,,New York,"10,028",FALSE
 POINT (-73.99283879250072 40.722346701845474),New Museum of Contemporary Art,(212) 219-1222,http://www.newmuseum.org/,235 Bowery,,New York,"10,002",FALSE
@@ -115,13 +115,13 @@ POINT (-73.98967904824913 40.718687698398995),Tenement Museum,(212) 431-0233,htt
 POINT (-73.98501448982452 40.719616728018636),"The Freakatorium, El Museo Loco",(212) 375-0475,http://www.freakatorium.com/,57 Clinton St.,,New York,"10,002",FALSE
 POINT (-73.9380587417615 40.80527638435791),The Jazz Museum in Harlem,(212) 348-8300,http://www.jazzmuseuminharlem.org/,104 E. 126th Street,Suite 2D,New York,"10,035",FALSE
 POINT (-73.94196177006319 40.66891157732498),The Jewish Children's Museum,(718) 467-0600,http://www.jcmonline.org/,792 Eastern Pkwy,,Brooklyn,"11,213",FALSE
-POINT (-73.99392966775832 40.74700837582729),The Museum at FIT,(212) 217-5800,http://www.fitnyc.edu/306.asp,7th Avenue at West 27th Street,,New York,"10,001",TRUE
+POINT (-73.99392966775832 40.74700837582729),The Museum at FIT,(212) 217-5800,http://www.fitnyc.edu/306.asp,7th Avenue at West 27th Street,,New York,"10,001",0
 POINT (-73.98904085250442 40.738642014511264),Theodore Roosevelt Birthplace,(212) 260-1616,http://www.nps.gov/thrb/index.htm,28 East 20th Street,,New York,"10,003",FALSE
 POINT (-73.98975703078781 40.7276767876997),Ukrainian Museum,(212) 228-0110,http://www.ukrainianmuseum.org/,222 East 6th Street,,New York,"10,003",FALSE
 POINT (-73.87942471849595 40.877379824668694),Valentine-Varian House,(718) 881-8900,http://www.museumregister.com/US/NewYork/Bronx/ValentineVarianHouse/Info.html,3266 Bainbridge Ave.,,Bronx,"10,467",FALSE
 POINT (-73.89482257025313 40.89111116729143),Van Cortlandt House Museum,(718) 543-3344,http://www.vancortlandthouse.org/,VAN CRTLANDT MANSION,Broadway at West 246th Street,Bronx,"10,471",FALSE
 POINT (-73.91165376574718 40.89788471476036),Wave Hill,(718) 549-3200,http://wavehill.org/visit/,West 249th Street & Independence Avenue,,Bronx,"10,471",FALSE
-POINT (-73.96383434736195 40.773407292902185),Whitney Museum of American Art,1 (800) WHITNEY,http://www.whitney.org/,945 Madison Ave.,,New York,"10,021",TRUE
+POINT (-73.96383434736195 40.773407292902185),Whitney Museum of American Art,1 (800) WHITNEY,http://www.whitney.org/,945 Madison Ave.,,New York,"10,021",0
 POINT (-73.92079629906307 40.644340681393366),Wyckoff Farmhouse Museum,(718) 629-5400,http://www.wyckoffassociation.org/,5816 Clarendon Ave,,Brooklyn,"11,203",FALSE
 POINT (-73.99376449363902 40.73802754297413),Leo Baeck Institute,(212) 744-6400,http://www.lbi.org/,15 W. 16th St.,,New York,"10,011",FALSE
 POINT (-73.99388579658319 40.73807723317813),American Sephardi Federation / Sephardic House,(212) 294-8350,http://www.americansephardifederation.org/,15 W. 16th St.,,New York,"10,011",FALSE
