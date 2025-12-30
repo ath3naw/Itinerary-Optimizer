@@ -25,7 +25,7 @@ def greedy_dir_alg(df, num_locations, distance_mat, alpha=0.5, beta=2.0, gamma=0
 
         vect = points-curr
         dists = np.linalg.norm(vect, axis=1)
-        dists[dists == 0] = np.inf  # avoid division by zero
+        dists[dists == 0] = np.inf  # avoid division by zero, makes it impossible to go on same coordinate if starting at that coordinate
         align = np.dot(vect / dists[:, None], dir)
         remain = np.linalg.norm(end - points, axis=1)
 
