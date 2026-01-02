@@ -10,3 +10,4 @@ Add optimization for:
 5. spaced out activities (not two in the same place)
 6. popularity/recommended
 7. different sections (e.g. public transport to another area, grouping areas to explore for different days) - use k-means++ for grouping
+8. function for creating a loop
