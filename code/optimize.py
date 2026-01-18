@@ -194,3 +194,15 @@ def penal_k_means(df, days, lam=0.2, gam=1e-7, max_iters=50, eps=1e-5):
 
         centers = new_centers
     return labels, centers
+
+# creating loops if same starting and ending points
+# pick k nearest points based on radius to start/end
+def pick_k_nearest(df, num_locations, distance_mat):
+    start_idx = df.index[(df["name"] == "start")][0]
+    start = df.iloc[start_idx][["easting", "northing"]].to_numpy(dtype=float)
+    points = df[["easting", "northing"]].to_numpy(dtype=float)
+    dists = np.linalg.norm(points - start, axis=1)
+    order = np.argsort(dists)
+    order = [start_idx] + list(order[1:num_locations+1]) + [start_idx]
+    best, best_dist = organize_path_dp(order, distance_mat)
+    return best, best_dist
