@@ -94,7 +94,12 @@ def create_itinerary(df, itinerary, total_dist):
     st.plotly_chart(fig1, use_container_width=True)
     st.subheader("New York Itinerary")
     for i, loc in enumerate(itinerary):
-        st.write(f"{i+1}. {df['name'].iloc[loc]}")
+        if i == 0:
+            st.write(f"{i+1}. {'Start'}")
+        elif i != len(itinerary) - 1:
+            st.write(f"{i+1}. {df['name'].iloc[loc]}")
+        else:
+            st.write(f"{i+1}. {'End'}")
         if pd.notna(df['image'].iloc[loc]):
             col1, col2, col3 = st.columns([1,2,1])
             with col1:
@@ -105,7 +110,7 @@ def create_itinerary(df, itinerary, total_dist):
                 pass
         if pd.notna(df['description'].iloc[loc]):
             st.write(df['description'].iloc[loc])
-    col1, col2, col3 = st.columns([1,2,1])
+    col1, col2, col3 = st.columns([1,3,1])
     with col1:
         pass
     with col2:

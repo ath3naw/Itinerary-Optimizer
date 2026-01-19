@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 import optimize, clean_dataset, functions
 
-st.title("Itinerary Optimizer for NY Attractions 📝")
+st.title("Itinerary Optimizer for NYC Attractions 📝")
 st.image("https://static.independent.co.uk/2025/03/04/14/03/iStock-2054112501.jpeg", caption="New York City")
 st.write("Plan an optimized route for NY attractions based on your preferences.")
 st.write("Developed by Athena Wang")
@@ -28,14 +28,14 @@ if loop == 'Yes':
         "Enter your starting address latitude (N):",
         min_value=40.5000, max_value=41.0000,
         value=40.7424,
-        placeholder="e.g., 40.7424",
+        placeholder="Between 40.5 and 41.0, e.g. 40.7424",
         format="%0.4f"
     )
     start_lon = st.number_input(
         "Enter your starting address longitude (E):",
         min_value=-74.2000, max_value=-73.7000,
         value=-74.0061,
-        placeholder="e.g., -74.0061",
+        placeholder="Between -74.2 and -73.7, e.g. -74.0061",
         format="%0.4f"
     )
 
