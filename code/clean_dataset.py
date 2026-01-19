@@ -44,9 +44,7 @@ def clean_dataset():
 
     return df
 
-def add_start_end(start_lat, start_lon, end_lat, end_lon):
-    df = clean_dataset()
-
+def add_start_end(df, start_lat, start_lon, end_lat, end_lon):
     data = {"name": ["start", "end"], "lat": [float(start_lat), float(end_lat)], "lon": [float(start_lon), float(end_lon)],
             "easting": [utm.from_latlon(float(start_lat), float(start_lon))[0], utm.from_latlon(float(end_lat), float(end_lon))[0]],
             "northing": [utm.from_latlon(float(start_lat), float(start_lon))[1], utm.from_latlon(float(end_lat), float(end_lon))[1]],}
@@ -54,9 +52,7 @@ def add_start_end(start_lat, start_lon, end_lat, end_lon):
 
     return df
 
-def add_start(start_lat, start_lon):
-    df = clean_dataset()
-
+def add_start(df, start_lat, start_lon):
     data = {"name": ["start"], "lat": [float(start_lat)], "lon": [float(start_lon)],
             "easting": [utm.from_latlon(float(start_lat), float(start_lon))[0]],
             "northing": [utm.from_latlon(float(start_lat), float(start_lon))[1]]}

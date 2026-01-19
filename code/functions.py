@@ -54,7 +54,7 @@ def plot_clusters(df, labels):
     plt.grid()
     plt.show()
 
-def create_itinerary(df, itinerary, total_dist):
+def create_itinerary(df, df_selected, itinerary, total_dist):
     fig1 = go.Figure()
     fig1.add_trace(go.Scattermapbox(
         mode="markers", # Only markers
@@ -66,13 +66,14 @@ def create_itinerary(df, itinerary, total_dist):
     ))
     fig1.add_trace(go.Scattermapbox(
         mode="lines",
-        lat=df["lat"].iloc[itinerary],
-        lon=df["lon"].iloc[itinerary],
+        lat=df_selected["lat"].iloc[itinerary],
+        lon=df_selected["lon"].iloc[itinerary],
         line=dict(width=4, color="red"),
+        text=df['name'],
         name="Route"
     ))
-    route_lats = df['lat'].iloc[itinerary]
-    route_lons = df['lon'].iloc[itinerary]
+    route_lats = df_selected['lat'].iloc[itinerary]
+    route_lons = df_selected['lon'].iloc[itinerary]
     lat_min, lat_max = df['lat'].min(), df['lat'].max()
     lon_min, lon_max = df['lon'].min(), df['lon'].max()
     center_lat = (lat_min + lat_max) / 2
@@ -84,7 +85,7 @@ def create_itinerary(df, itinerary, total_dist):
         marker=dict(size=14, color="red"),
         text=[str(i+1) for i in range(len(itinerary))],  # order labels
         textposition="top right",
-        hovertext=df["name"].iloc[itinerary],
+        hovertext=df_selected["name"].iloc[itinerary],
         hoverinfo="text",
         name="Route Order"
     ))
@@ -97,19 +98,19 @@ def create_itinerary(df, itinerary, total_dist):
         if i == 0:
             st.write(f"{i+1}. {'Start'}")
         elif i != len(itinerary) - 1:
-            st.write(f"{i+1}. {df['name'].iloc[loc]}")
+            st.write(f"{i+1}. {df_selected['name'].iloc[loc]}")
         else:
             st.write(f"{i+1}. {'End'}")
-        if pd.notna(df['image'].iloc[loc]):
+        if pd.notna(df_selected['image'].iloc[loc]):
             col1, col2, col3 = st.columns([1,2,1])
             with col1:
                 pass
             with col2:
-                st.image(df['image'].iloc[loc], width='stretch')
+                st.image(df_selected['image'].iloc[loc], width='stretch')
             with col3:
                 pass
-        if pd.notna(df['description'].iloc[loc]):
-            st.write(df['description'].iloc[loc])
+        if pd.notna(df_selected['description'].iloc[loc]):
+            st.write(df_selected['description'].iloc[loc])
     col1, col2, col3 = st.columns([1,3,1])
     with col1:
         pass
