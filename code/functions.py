@@ -1,5 +1,8 @@
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
+import streamlit as st
+import plotly.graph_objects as go
 def create_distance_matrix(df):
     X = df[["easting", "northing"]].to_numpy(dtype=float)
 
@@ -50,3 +53,63 @@ def plot_clusters(df, labels):
     plt.title('NYC Museums for', len(np.unique(labels)), ' Day Itinerary')
     plt.grid()
     plt.show()
+
+def create_itinerary(df, itinerary, total_dist):
+    fig1 = go.Figure()
+    fig1.add_trace(go.Scattermapbox(
+        mode="markers", # Only markers
+        lon=df['lon'],
+        lat=df['lat'],
+        marker=dict(size=10, color='blue', opacity=0.8),
+        text=df['name'], # Text for hover
+        name="Attractions"
+    ))
+    fig1.add_trace(go.Scattermapbox(
+        mode="lines",
+        lat=df["lat"].iloc[itinerary],
+        lon=df["lon"].iloc[itinerary],
+        line=dict(width=4, color="red"),
+        name="Route"
+    ))
+    route_lats = df['lat'].iloc[itinerary]
+    route_lons = df['lon'].iloc[itinerary]
+    lat_min, lat_max = df['lat'].min(), df['lat'].max()
+    lon_min, lon_max = df['lon'].min(), df['lon'].max()
+    center_lat = (lat_min + lat_max) / 2
+    center_lon = (lon_min + lon_max) / 2
+    fig1.add_trace(go.Scattermapbox(
+        mode="markers+text",
+        lat=route_lats,
+        lon=route_lons,
+        marker=dict(size=14, color="red"),
+        text=[str(i+1) for i in range(len(itinerary))],  # order labels
+        textposition="top right",
+        hovertext=df["name"].iloc[itinerary],
+        hoverinfo="text",
+        name="Route Order"
+    ))
+    fig1.update_layout(mapbox = dict(style="carto-positron",
+                                    center=dict(lat=center_lat, lon=center_lon),
+                                    zoom=9), height=500) # Set map style
+    st.plotly_chart(fig1, use_container_width=True)
+    st.subheader("New York Itinerary")
+    for i, loc in enumerate(itinerary):
+        st.write(f"{i+1}. {df['name'].iloc[loc]}")
+        if pd.notna(df['image'].iloc[loc]):
+            col1, col2, col3 = st.columns([1,2,1])
+            with col1:
+                pass
+            with col2:
+                st.image(df['image'].iloc[loc], width='stretch')
+            with col3:
+                pass
+        if pd.notna(df['description'].iloc[loc]):
+            st.write(df['description'].iloc[loc])
+    col1, col2, col3 = st.columns([1,2,1])
+    with col1:
+        pass
+    with col2:
+        st.subheader(f"Total distance (m): {total_dist:.2f}")
+    with col3:
+        pass
+    st.badge("Note: Distances are approximate and calculated using UTM coordinates.")
