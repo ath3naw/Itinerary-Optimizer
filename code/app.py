@@ -57,8 +57,7 @@ else:
             for i, cat in enumerate(cats):
                 with cols[i % 3]:
                     if st.checkbox(cat, key=f"cat_{t}_{cat}"):
-                        selected_categories.add((t, cat))
-
+                        selected_categories.add(cat)
     df_selected = df[
         (df['type'].isin(st.session_state.selected_types)) &
         (
