@@ -114,6 +114,10 @@ if loop == 'Yes':
         df_selected = clean_dataset.add_start(df_selected, start_lat, start_lon)
         distance_mat = functions.create_distance_matrix(df_selected)
         itinerary, total_dist = optimize.pick_k_nearest(df_selected, num_locations, distance_mat)
+        itinerary2, total_dist2 = optimize.pick_loop_points(df_selected, num_locations)
+        if total_dist2 < total_dist:
+            itinerary = itinerary2
+            total_dist = total_dist2
         st.subheader("Interactive Map of Itinerary")
         st.write("Can toggle types of points on/off in the legend and zoom in using top panel (+) button. Hover over points to see details.")
         functions.create_itinerary(df, df_selected, itinerary, total_dist)

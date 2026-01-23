@@ -206,3 +206,48 @@ def pick_k_nearest(df, num_locations, distance_mat):
     order = [start_idx] + list(order[1:num_locations+1]) + [start_idx]
     best, best_dist = organize_path_dp(order, distance_mat)
     return best, best_dist
+
+# easy method for calculating the path cost
+def path_cost(df, order):
+    total_dist = 0
+    for i in range(len(order)-1):
+        total_dist += np.linalg.norm(
+            df.loc[order[i], ["easting", "northing"]] - df.loc[order[i+1], ["easting", "northing"]]
+        )
+    return total_dist
+
+# want a code for a loop aimed at an angle from the start (with no angle between points going past 180 degrees from the start)
+def pick_loop_points(df, num_locations, transport_mode='walking'):
+    start_idx = df.index[(df["name"] == "start")][0]
+    start = df.iloc[start_idx][["easting", "northing"]].to_numpy(dtype=float)
+    points = df[["easting", "northing"]].to_numpy(dtype=float)
+
+    mid = np.mean(points, axis=0) # center of all the points, where most of the attractions are
+    dir = mid-start
+    # average steps for tourists = 15000 steps/day -> 12000 m/day -> 1910 m circle radius
+    if transport_mode == 'walking':
+        cen = start + dir/np.linalg.norm(dir)*1910
+    elif transport_mode == 'biking':
+        cen = start + dir/np.linalg.norm(dir)*3844
+    elif transport_mode == 'transit':
+        cen = start + dir/np.linalg.norm(dir)*5122
+    elif transport_mode == 'driving':
+        cen = start + dir/np.linalg.norm(dir)*5122
+
+    # Polar coords
+    vect = points - cen
+    r = np.linalg.norm(vect, axis=1)
+    theta = np.arctan2(vect[:,1], vect[:,0])
+
+    # Pick k points near radius, defined by distance to start
+    r0 = r[start_idx]
+    idx = np.argsort(np.abs(r - r0))[:num_locations+1]  # +1 to account for start point
+    idx = np.delete(idx, np.where(idx == start_idx))
+    selected_theta = theta[idx]
+
+    # Order circularly
+    order = np.argsort(selected_theta)
+    itinerary = [start_idx] + list(idx[order]) + [start_idx]  # include start point at end
+    total_dist = path_cost(df, itinerary)
+
+    return itinerary, total_dist

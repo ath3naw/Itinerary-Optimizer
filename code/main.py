@@ -9,10 +9,13 @@ if __name__ == "__main__":
             start_lon = float(input("Enter your starting address longitude: "))
             num_locations = int(input("Enter the number of locations to visit between start and end: "))
             days = int(input("Enter the number of days you plan to stay: "))
-            df = clean_dataset.add_start(start_lat, start_lon)
+            df = clean_dataset.clean_dataset()
+            df = clean_dataset.add_start(df, start_lat, start_lon)
             print(df.head())
             distance_mat = functions.create_distance_matrix(df)
             itinerary, total_dist = optimize.pick_k_nearest(df, num_locations, distance_mat)
+            itinerary2, total_dist2 = optimize.pick_loop_points(df, num_locations)
+            print(itinerary2)
             functions.check_path(df, itinerary, total_dist)
             functions.plot_path(df, itinerary)
         elif loop == 'no':
@@ -23,7 +26,7 @@ if __name__ == "__main__":
             end_lon = float(input("Enter your ending address longitude: "))
             num_locations = int(input("Enter the number of locations to visit between start and end: "))
             days = int(input("Enter the number of days you plan to stay: "))
-            df = clean_dataset.add_start_end(start_lat, start_lon, end_lat, end_lon)
+            df = clean_dataset.add_start_end(df, start_lat, start_lon, end_lat, end_lon)
             distance_mat = functions.create_distance_matrix(df)
             itinerary, total_dist = optimize.greedy_dir_alg(df, num_locations, distance_mat)
 
