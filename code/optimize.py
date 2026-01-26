@@ -251,3 +251,65 @@ def pick_loop_points(df, num_locations, transport_mode='walking'):
     total_dist = path_cost(df, itinerary)
 
     return itinerary, total_dist
+
+# want to actually implement k-means based on distance from the starting idx, want to start with start and end idx appended
+def kmeans_init_from_start(df, days):
+    locs = df[["easting", "northing"]]
+    start_idx = df.index[(df["name"] == "start")][0]
+    n, d = locs.shape[0], locs.shape[1] # d = number of features considered
+    n = n-2
+    locations = locs.to_numpy(dtype = float)
+    # already define one of the centers as the starting idx
+    centers = np.zeros((days+1, d), dtype=float)
+    centers[0] = locations[start_idx]
+    remain_index = list(range(n))
+
+    for idx in range(1, days+1):
+        dists = np.min(np.linalg.norm(locations[remain_index][:,None,:] - centers[None, :idx, :], axis = 2)**2, axis = 1)
+        probs = dists / np.sum(dists)
+        new_idx = np.random.choice(remain_index, p=probs)
+        centers[idx] = locations[new_idx]
+        remain_index.remove(new_idx)
+    return centers
+
+# penalized k-means, will use same k_means++ distribution for initiation (want cluster centers to be as spread out as possible initially)
+def penal_k_means(df, days, lam=0.2, gam=1e-7, max_iters=50, eps=1e-5):
+    locs = df[["easting", "northing"]]
+    centers = kmeans_init_from_start(df, days)
+    n,d = locs.shape[0], locs.shape[1]
+    locs = locs.to_numpy(dtype = float)
+    costs = np.zeros((n, d))
+    delt = np.zeros(days+1)
+    delt[0] = 500
+    # start loop for max_iters times
+    for _ in range(max_iters):
+        # assign clusters
+        dists = np.linalg.norm(locs[:,None,:]-centers[None,:,:], axis = 2)
+        sizes = np.zeros(days+1)
+        tar = [(n-1)/days if a != 0 else 1 for a in range(days+1)]
+        labels = np.empty(n)
+        # want to have initial assignments and then adjust to locally optimal minima/maxima like in gradient descent
+        dist_pen = gam*(np.linalg.norm(centers-centers[0], axis = 1))**2
+        for i in np.argsort(np.min(dists, axis = 1)):
+            costs = []
+            for j in range(days+1):
+                bal_pen = lam*(sizes[j]-tar[j])**2
+                costs.append(dists[i,j]+bal_pen+dist_pen[j]+delt[j])
+            idx = np.argmin(costs)
+            labels[i] = idx
+            sizes[idx] += 1
+        print(np.unique(labels))
+
+            # recompute centers
+        new_centers = centers.copy()
+        for j in range(days+1):
+            if j == 0:
+                continue
+            elif np.any(labels == j):
+                new_centers[j] = locs[labels == j].mean(axis = 0)
+        # if total change is less than epsilon, stop loop
+        if np.linalg.norm(new_centers - centers) < eps:
+            break
+
+        centers = new_centers
+    return labels, centers
