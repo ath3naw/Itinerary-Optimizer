@@ -11,12 +11,12 @@ st.write("Plan an optimized route for NY attractions based on your preferences."
 st.write("Developed by Athena Wang")
 df = clean_dataset.clean_dataset()
 # create map
-fig = px.scatter_mapbox(df, lat='lat', lon='lon',
+fig = px.scatter_map(df, lat='lat', lon='lon',
                         hover_name='name', # Info shown on hover
                         hover_data=['indoor', 'museum'], # More info
                         zoom=9, height=500)
 fig.update_layout(mapbox_style="carto-positron") # Set map style
-st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, width='stretch')
 expanded = False
 df_selected = df.copy()
 
@@ -179,7 +179,7 @@ if days == 1:
             st.divider()
             df_selected = clean_dataset.add_start_end(df_selected, start_lat, start_lon, end_lat, end_lon)
             distance_mat = functions.create_distance_matrix(df_selected)
-            itinerary, total_dist = optimize.greedy_dir_alg(df_selected, num_locations, distance_mat)
+            itinerary, total_dist = optimize.shortest_paths(df_selected, num_locations, distance_mat)
             st.subheader("Interactive Map of Itinerary")
             st.write("Can toggle types of points on/off in the legend and zoom in using top panel (+) button. Hover over points to see details.")
             functions.create_itinerary(df, df_selected, itinerary, total_dist)

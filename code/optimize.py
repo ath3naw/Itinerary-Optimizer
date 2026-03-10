@@ -313,3 +313,39 @@ def penal_k_means(df, days, lam=0.2, gam=1e-7, max_iters=50, eps=1e-5):
 
         centers = new_centers
     return labels, centers
+
+# implement Dijkstra's algorithm
+def shortest_paths(df, num_locations, distance_mat):
+    start_idx = df.index[(df["name"] == "start")][0]
+    end_idx = df.index[df["name"] == "end"][0]
+    distance_mat = distance_mat.copy()
+    n = len(distance_mat)
+    for i in range(n):
+        distance_mat[i,i] = np.inf # cannot go back to itself
+    edges = num_locations + 1
+    d = np.full((edges+1, n), np.inf)
+    visited = [[[] for _ in range(n)] for _ in range(edges+1)]
+    parent = np.full((edges+1, n), -1, dtype=int)
+    visited[0][start_idx] = [start_idx]
+    d[0][start_idx] = 0
+    for j in range(1, edges+1):
+        for k in range(n):
+            if d[j-1][k] == np.inf:
+                continue
+            for i in range(n):
+                if i not in visited[j-1][k]:
+                    pot = d[j-1][k]+distance_mat[k][i]
+                    if pot < d[j][i]:
+                        d[j][i] = pot
+                        parent[j][i] = k
+                        visited[j][i]= visited[j-1][k] + [i]
+    best_dist = d[edges][end_idx]
+
+    # reconstruct path
+    order = [end_idx]
+    curr = end_idx
+    for j in range(edges, 0, -1):
+        curr = parent[j][curr]
+        order.append(curr)
+    order.reverse()
+    return order, best_dist

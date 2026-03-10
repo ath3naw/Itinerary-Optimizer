@@ -92,7 +92,7 @@ def create_itinerary(df, df_selected, itinerary, total_dist):
     fig1.update_layout(mapbox = dict(style="carto-positron",
                                     center=dict(lat=center_lat, lon=center_lon),
                                     zoom=9), height=500) # Set map style
-    st.plotly_chart(fig1, use_container_width=True)
+    st.plotly_chart(fig1, width = 'stretch')
     st.subheader("New York Itinerary")
     for i, loc in enumerate(itinerary):
         if i == 0:
